@@ -1,7 +1,7 @@
 import { 
-  users, type User, type InsertUser,
-  bookings, type Booking, type InsertBooking,
-  contacts, type Contact, type InsertContact
+  type User, type InsertUser,
+  type Booking, type InsertBooking,
+  type Contact, type InsertContact
 } from "@shared/schema";
 
 export interface IStorage {
@@ -30,6 +30,7 @@ export class MemStorage implements IStorage {
   private contactId: number;
 
   constructor() {
+    // Initialize with empty maps for development
     this.users = new Map();
     this.bookingStore = new Map();
     this.contactStore = new Map();
@@ -44,28 +45,31 @@ export class MemStorage implements IStorage {
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    for (const user of this.users.values()) {
+      if (user.username === username) {
+        return user;
+      }
+    }
+    return undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = this.userId++;
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const user: User = {
+      id: this.userId++,
+      ...insertUser
+    };
+    this.users.set(user.id, user);
     return user;
   }
 
   // Booking methods
   async createBooking(bookingData: InsertBooking): Promise<Booking> {
-    const id = this.bookingId++;
-    const now = new Date();
-    const booking: Booking = { 
-      ...bookingData, 
-      id, 
-      createdAt: now 
+    const booking: Booking = {
+      id: this.bookingId++,
+      createdAt: new Date(),
+      ...bookingData
     };
-    this.bookingStore.set(id, booking);
+    this.bookingStore.set(booking.id, booking);
     return booking;
   }
 
@@ -79,14 +83,12 @@ export class MemStorage implements IStorage {
 
   // Contact methods
   async createContact(contactData: InsertContact): Promise<Contact> {
-    const id = this.contactId++;
-    const now = new Date();
-    const contact: Contact = { 
-      ...contactData, 
-      id, 
-      createdAt: now 
+    const contact: Contact = {
+      id: this.contactId++,
+      createdAt: new Date(),
+      ...contactData
     };
-    this.contactStore.set(id, contact);
+    this.contactStore.set(contact.id, contact);
     return contact;
   }
 
