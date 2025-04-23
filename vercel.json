@@ -2,18 +2,21 @@
   "version": 2,
   "builds": [
     {
-      "src": "package.json",
+      "src": "dist/index.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "dest": "dist/index.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/"
+      "dest": "dist/public/$1"
     }
-  ]
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
