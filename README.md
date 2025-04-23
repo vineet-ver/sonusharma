@@ -1,30 +1,65 @@
-# SS Travels - Luxury Car Rental
+# Wheels Wedding
 
-A luxury car rental website for Indian weddings and events with animated dark jellyfish theme.
+A wedding car booking service application built with Node.js, Express, and React.
 
 ## Features
 
-- Elegant dark theme with animated elements
-- Fleet of premium vehicles for rent
-- Booking system for events and special occasions
-- Destination listings across India
-- Responsive design for all devices
+- Car booking system for weddings
+- Contact form
+- User authentication
+- Responsive design
 
-## Deployment to Vercel
+## Technologies Used
 
-This project is configured for easy deployment to Vercel. Follow these steps:
+- **Frontend**: React, TailwindCSS
+- **Backend**: Node.js, Express
+- **Database**: PostgreSQL (via Neon)
 
-1. Create an account on [Vercel](https://vercel.com/) if you don't have one already
-2. Install the Vercel CLI: `npm i -g vercel`
-3. Run `vercel login` and follow the instructions
-4. In the project directory, run `vercel` to deploy
-5. Follow the prompts to link to your Vercel account
-6. For production deployment, run `vercel --prod`
+## Deployment Instructions
 
-## Tech Stack
+### Prerequisites
 
-- React.js with TypeScript
-- Express.js backend
-- Tailwind CSS for styling
-- Framer Motion for animations
-- React Query for API requests
+- Node.js 18+
+- npm or yarn
+- PostgreSQL database (or Neon database service)
+
+### Local Development
+
+1. Clone the repository
+   ```
+   git clone <repository-url>
+   cd WheelsWedding
+   ```
+
+2. Install dependencies
+   ```
+   npm install
+   ```
+
+3. Set up environment variables
+   Create a `.env` file in the root directory with the following variables:
+   ```
+   DATABASE_URL=your_database_connection_string
+   PORT=3000
+   NODE_ENV=development
+   SESSION_SECRET=your_session_secret
+   ```
+
+4. Run the development server
+   ```
+   npm run dev
+   ```
+
+### Deploying to Vercel
+
+1. Push your code to GitHub
+2. Sign up for a Vercel account at https://vercel.com
+3. Import your GitHub repository
+4. Configure environment variables:
+   - DATABASE_URL
+   - SESSION_SECRET
+5. Deploy the application
+
+## License
+
+MIT
